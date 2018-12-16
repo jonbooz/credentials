@@ -4,22 +4,23 @@ A library for accessing my credentials that I've stored in AWS. This also includ
 
 ## Including This Library
 
-In order to include this library in your project, perform the following:
+This library can be included in your node.js projects by including the following dependency:
 
-Register this library's repository as a submodule in your project
+    "credentials": "git+ssh://git@github.com:jonbooz/credentials.git"
 
-    git submodule add git@github.com:jonbooz/credentials.git credentials
+The library can then be included into your file with:
 
-Then include the project in the `settings.gradle` file:
+    const credentials = require('credentials');
 
-    include ':project', ':credentials'
+And you can read specific credential with:
 
-Finally, compile the library as a dependency in your project's `build.gradle` file:
+    credentials.read(<name>) :: Promise<String, Error>
 
-    dependencies {
-        compile project(':credentials')
-    }
+## Command Line Tools
 
-Then make sure you clone the project recursively in the future:
+This module also comes with command line tools for reading and writing credentials.  They are found in the `./bin` directory of this module.
 
-    git clone --recurse-submodules -j8 <project-url>
+    ./credential-read <name>
+    ./credential-save <name> <value>
+
+> TODO `credential-save` should prompt for the value in password from so that it isn't saved to the history.
