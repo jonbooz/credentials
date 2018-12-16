@@ -1,0 +1,27 @@
+{
+  "name": "options-data",
+  "version": "0.0.1",
+  "authors": [
+    "Jonathan Booz <jon@jonbooz.com>"
+  ],
+  "description": "",
+  "license": "AllRightsReserved",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "build",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "node-datetime": "latest",
+    "aws-sdk": "latest"
+  },
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-aws-cloudformation": "latest"
+  }
+}
