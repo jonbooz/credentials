@@ -1,5 +1,5 @@
 {
-    "name": "options-data",
+    "name": "credentials",
     "version": "0.0.1",
     "authors": [
         "Jonathan Booz <jon@jonbooz.com>"
@@ -7,7 +7,8 @@
     "description": "",
     "license": "AllRightsReserved",
     "private": true,
-    "main": "src/index.js",
+    "main": "src/credentials.js",
+    "types": "src/credentials.d.ts",
     "ignore": [
         "**/.*",
         "build",
@@ -15,15 +16,27 @@
         "test",
         "tests"
     ],
+    "scripts": {
+        "test": "npm run test-unit && npm run test-integ",
+        "test-unit": "NODE_ENV=test mocha --require co-mocha 'src/**/*.spec.js'",
+        "test-integ": "NODE_ENV=test mocha --require co-mocha 'src/**/*.integ.js'"
+    },
     "dependencies": {
         "aws-utils": "git+ssh://git@github.com:jonbooz/aws-utils.git",
         "node-datetime": "latest",
-        "aws-sdk": "latest"
+        "aws-sdk": "latest",
+        "readline-sync": "latest"
     },
     "devDependencies": {
         "grunt": "latest",
         "grunt-contrib-clean": "latest",
         "grunt-contrib-jshint": "latest",
-        "grunt-aws-cloudformation": "latest"
+        "grunt-aws-cloudformation": "latest",
+        "mocha": "latest",
+        "co-mocha": "latest",
+        "chai": "latest",
+        "sinon": "latest",
+        "@types/chai": "latest",
+        "@types/mocha": "latest"
     }
 }
