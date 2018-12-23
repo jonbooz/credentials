@@ -45,6 +45,36 @@ describe('Credentials', () => {
         awsMock.verify();
     });
 
+    it('scans credentials', async () => {
+        const expected = 'credential';
+
+        const awsMock = this.sandbox.mock(this.aws);
+
+        const resourcesMock = awsMock.expects('listStackResources');
+        resourcesMock.returns(new Promise((resolve, reject) => {
+            resolve([{credentialsTable: 'tableId'}]);
+        }));
+
+        const ddbReadStub = this.sandbox.stub(this.aws.ddb, 'scan');
+        ddbReadStub.returns(new Promise((resolve, reject) => {
+            resolve([{name: 'name', value: 'value'}]);
+        }));
+
+        const decryptMock = awsMock.expects('call');
+        decryptMock
+                .withArgs(sinon.match('KMS'), sinon.match('decrypt'), sinon.match.any)
+                .once()
+                .returns(new Promise((resolve, reject) => {
+                        resolve({Plaintext: { toString: (p) => expected }});
+                }));
+
+        const res = await this.credentials.scan('name');
+        expect(res).to.eql({name: expected});
+        
+        awsMock.verify();
+    });
+
+
     it('saves a credential', async () => {
         const expected = 'credential';
 

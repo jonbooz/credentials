@@ -18,4 +18,18 @@ describe('Credentials', () => {
         let result = await credentials.read(CREDENTIAL_NAME);
         expect(result).to.equal(expected);
     });
+
+    it ('reads a scan of credentials', async () => {
+        const aws = new AwsUtils();
+        const credentials = new Credentials(aws);
+
+        const value = datetime.create().format('Y-m-d H:I:S');
+        const expected = { };
+        expected[CREDENTIAL_NAME] = value;
+
+        await credentials.save(CREDENTIAL_NAME, value);
+        let result = await credentials.scan(CREDENTIAL_NAME);
+        expect(result).to.eql(expected);
+
+    });
 });

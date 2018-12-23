@@ -27,6 +27,14 @@ declare class Credentials {
     read(credentialName: string): string;
 
     /**
+     * This gets a set of credentials based on a leading prefix.
+     * 
+     * @param credentialPrefix - The initial prefix for a set of credentials
+     * @return {_.Dictionary<string>} A mapping of credential names to values
+     */
+    scan(credentialPrefix: string): _.Dictionary<string>
+
+    /**
      * This encrypts and saves the credential value into the stack.
      * 
      * @param {string} credentialName - The name of the credential.
